@@ -1,0 +1,8 @@
+{
+  "name": "Self-discipline assistant",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "33aa480c"
+}
