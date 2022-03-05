@@ -1,25 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Inbox
+      自律助手
     </ion-title>
+    <ion-button [disabled]="showInput" color="danger" slot="end" (click)="Stop()">停止</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">
-        Inbox
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-list>
-    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
-  </ion-list>
+  <div class="timer">
+    <h4> 倒计时 </h4>
+    <span id="hours"> {{hours}} </span>小时 
+    <span id="minutes"> {{minutes}} </span>分钟
+    <span id="seconds"> {{seconds}} </span>秒
+</div>
+<ion-item [hidden]="!showInput">
+  <ion-item>
+  <ion-label position="floatiing">时：</ion-label>
+<ion-input type="number"[(ngModel)]="hours" ></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floatiing">分：</ion-label>
+<ion-input type="number" [(ngModel)]="minutes" ></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floatiing">秒：</ion-label>
+<ion-input type="number" [(ngModel)]="seconds" ></ion-input>
+</ion-item>
+</ion-item>
+  <ion-item [disabled]="!showInput">
+    <ion-label position="floatiing">进程名:</ion-label>
+  <ion-input type="text"[(ngModel)]="processName" ></ion-input>
+  </ion-item>
+<ion-button expand="block" (click)="start()">开始计时</ion-button>
+
+
+
 </ion-content>
