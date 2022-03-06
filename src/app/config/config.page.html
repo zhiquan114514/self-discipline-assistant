@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>配置</ion-title>
+    <ion-back-button slot="start"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="float" color="primary">ip地址: </ion-label>
+    <ion-input placeholder="ip地址" [(ngModel)]="ipAddress"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="float" color="primary">端口: </ion-label>
+    <ion-input placeholder="端口" [(ngModel)]="port"></ion-input>
+  </ion-item>
+  <ion-button (click)="setConfig()">配置</ion-button>
+  配置状态:{{status}}
+</ion-content>

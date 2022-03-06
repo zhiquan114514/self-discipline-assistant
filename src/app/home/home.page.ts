@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
-import { DataService, Message } from '../services/data.service';
-
+import { Route, Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -9,17 +8,19 @@ import { DataService, Message } from '../services/data.service';
 })
 export class HomePage {
 
+  constructor(private router : Router) {}
   private subscription: Subscription;
   public showInput = true;
 
-    public processName;
-    public seconds;
-    public minutes;
-    public hours;
+    public processName:string;
+    public seconds=0;
+    public minutes=0;
+    public hours=0;
 
 
 
-    private countdown () {        
+    private countdown () {   
+      let msg = this.processName     
       if(this.seconds != 0)
         this.seconds -=1;
       else if(this.seconds == 0 && this.minutes != 0) {
@@ -31,18 +32,29 @@ export class HomePage {
         this.hours -= 1;
       } else{
         this.showInput = true;
-
-        console.log("send")
         this.subscription.unsubscribe()
+        alert('ws://'+localStorage.getItem('config'))
+        var ws = new WebSocket('ws://'+localStorage.getItem('config'));
+        alert("发送中")
+        ws.onopen = function () {
+          this.send(msg);         
+      };
+      ws.onerror = function () {
+        alert('error occurred!');
+    };
+
       }
     }
 
-
-  start(){
+  Start(){
+    if(localStorage.getItem('config') == null)
+    alert('你还未进行配置！')
+    else{
     this.showInput = false;
 
          this.subscription = interval(1000)
       .subscribe(x => { this.countdown(); });
+    }
   }
   Stop(){
     this.subscription.unsubscribe();
@@ -51,6 +63,10 @@ export class HomePage {
     this.hours = 0
     this.showInput = true;
   }
+  toConfig(){
+    this.router.navigate(['config']);
+  }
+
 
     ngOnInit() {
 
@@ -61,3 +77,5 @@ export class HomePage {
    }
 
 }
+
+

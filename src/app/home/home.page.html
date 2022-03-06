@@ -4,6 +4,7 @@
       自律助手
     </ion-title>
     <ion-button [disabled]="showInput" color="danger" slot="end" (click)="Stop()">停止</ion-button>
+    <ion-button slot="secondary" (click)="toConfig()">配置</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -32,7 +33,7 @@
     <ion-label position="floatiing">进程名:</ion-label>
   <ion-input type="text"[(ngModel)]="processName" ></ion-input>
   </ion-item>
-<ion-button expand="block" (click)="start()">开始计时</ion-button>
+<ion-button expand="block" (click)="Start()">开始计时</ion-button>
 
 
 

@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Self-discipline assistant",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
